@@ -250,3 +250,69 @@ footer p {
     margin: 0;
     font-size: 0.9em;
 }
+body {
+  background-color: #000; /* Fondo negro para simular el espacio */
+  background-image: url('tu-imagen-de-estrellas.jpg'); /* Reemplaza con la URL de tu imagen de estrellas */
+  background-size: cover; /* Cubre todo el fondo */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  color: #fff; /* Texto blanco para mejor contraste */
+  font-family: sans-serif; /* Una fuente legible */
+  margin: 0; /* Elimina los márgenes predeterminados del cuerpo */
+  padding: 0; /* Elimina el relleno predeterminado del cuerpo */
+}
+
+/* Opcional: Puedes agregar un filtro de brillo sutil para las estrellas si tu imagen lo necesita */
+.space-background {
+  position: fixed; /* Fija el fondo para que no se desplace con el contenido */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Coloca el fondo detrás del contenido */
+  /* filter: brightness(1.2); /* Ajusta el brillo si es necesario */
+}
+
+/* Opcional: Si no tienes una imagen, puedes simular estrellas con un degradado radial */
+.space-background-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.9) 70%);
+}
+
+/* Opcional: Puedes agregar "brillo" a las estrellas simuladas con múltiples capas de degradados */
+.space-background-animated {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 2%, transparent 5%) 0 0,
+              radial-gradient(circle, rgba(255, 255, 255, 0.15) 2%, transparent 3%) 30px 30px,
+              radial-gradient(circle, rgba(255, 255, 255, 0.25) 2%, transparent 4%) 60px 60px,
+              #000;
+  background-size: 70px 70px;
+  animation: twinkling 2s linear infinite; /* Opcional: animación de parpadeo */
+}
+
+@keyframes twinkling {
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Estilos para el contenido encima del fondo */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h1, p {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra para el texto */
+}
