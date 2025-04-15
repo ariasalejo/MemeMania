@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemeMania - Categorías Cósmicas</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        /* --- TEMA ESPACIAL MEJORADO + ANIMACIONES --- */
+        :root {
+            --space-dark: rgba(10, 20, 40, 0.8);
+            --space-light: rgba(20, 30, 50, 0.7);
+            --neon-cyan: rgba(0, 191, 255, 0.8);
+            --neon-border: rgba(0, 191, 255, 0.5);
+            --text-light: #eee;
+            --text-white: #fff;
+        }
+        /* ... (Animaciones de estrellas y estilos base del body, header, nav, main, footer - como antes) ... */
+        body {
+            background-color: #0a1428;
+            color: var(--text-light);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before, body::after { content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; }
+        body::before { /* Estrellas pequeñas */ background-image: radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)), radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)), radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 130px 80px, #eee, rgba(0,0,0,0)), radial-gradient(1.5px 1.5px at 160px 120px, #ddd, rgba(0,0,0,0)); background-repeat: repeat; background-size: 200px 200px; animation: move-stars-1 200s linear infinite; }
+        body::after { /* Estrellas medianas */ background-image: radial-gradient(2px 2px at 50px 50px, #fff, rgba(0,0,0,0)), radial-gradient(2px 2px at 100px 100px, #ddd, rgba(0,0,0,0)), radial-gradient(3px 3px at 150px 150px, #fff, rgba(0,0,0,0)); background-repeat: repeat; background-size: 300px 300px; animation: move-stars-2 150s linear infinite; opacity: 0.8; }
+        header { text-align: center; padding: 20px; background-color: rgba(0, 0, 0, 0.8); border-bottom: 1px solid var(--neon-border); z-index: 10; position: relative; }
+        h1 { font-size: 3em; color: var(--text-white); text-shadow: 0 0 8px var(--neon-cyan), 2px 2px 5px rgba(0, 0, 0, 0.8); margin-top: 0; margin-bottom: 10px; }
+        h1::before { content: '🌌 '; } h1::after { content: ' 🌌'; }
+        h2 { color: var(--text-light); text-align: center; margin-top: 40px; text-shadow: 0 0 5px var(--neon-cyan), 1px 1px 3px rgba(0, 0, 0, 0.6); }
+        nav ul { list-style: none; padding: 0; } nav ul li { display: inline; margin: 0 15px; } nav ul li a { color: var(--text-white); text-decoration: none; font-size: 1.2em; transition: color 0.3s, text-shadow 0.3s; } nav ul li a:hover { color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); text-decoration: none; }
+        main { flex-grow: 1; padding: 20px; z-index: 5; position: relative; }
+        footer { text-align: center; padding: 20px; background-color: rgba(0, 0, 0, 0.8); border-top: 1px solid var(--neon-border); width: 100%; margin-top: auto; z-index: 10; position: relative; } footer p { color: var(--text-light); margin: 0; font-size: 0.9em; }
+
+        /* --- Estilos Específicos de Categorías --- */
+        .category-intro { text-align: center; margin: 30px auto 40px auto; font-size: 1.1em; padding: 0 10%; line-height: 1.6; background-color: var(--space-light); border-radius: 8px; max-width: 800px; padding: 20px; border: 1px solid var(--neon-border); }
+        .category-list { padding: 20px; }
+        .category-container { padding: 20px; margin-bottom: 20px; border: 1px solid var(--neon-border); border-radius: 8px; background-color: var(--space-dark); color: var(--text-light); }
+        .category-title { font-size: 1.8em; color: var(--neon-cyan); margin-bottom: 15px; text-align: center; text-shadow: 0 0 5px var(--neon-cyan); }
+        .emoji-download-zone { display: flex; flex-wrap: wrap; gap: 15px; padding: 15px; border: 1px dashed var(--neon-border); border-radius: 8px; margin-top: 15px; justify-content: center; background-color: rgba(0, 0, 0, 0.5); }
+        .downloadable-emoji { font-size: 3em; cursor: pointer; user-select: none; transition: transform 0.2s ease-in-out; } .downloadable-emoji:hover { transform: scale(1.2); text-shadow: 0 0 8px var(--neon-cyan); }
+        .download-link { display: inline-block; font-size: 1.2em; color: var(--neon-cyan); text-decoration: none; border: 1px solid var(--neon-cyan); padding: 10px 15px; border-radius: 5px; transition: background-color 0.3s, color 0.3s; }
+        .download-link:hover { background-color: var(--neon-cyan); color: var(--space-dark); }
+
+        /* --- SECCIÓN DE DESCARGAS LLAMATIVA --- */
+        .download-hub {
+            text-align: center;
+            padding: 40px 20px;
+            margin: 40px auto;
+            background: linear-gradient(45deg, var(--space-dark), rgba(0, 0, 0, 0.9));
+            border: 2px solid var(--neon-cyan);
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--neon-cyan), inset 0 0 10px rgba(0, 191, 255, 0.5);
+        }
+
+        .download-hub h2 {
+            font-size: 2.5em;
+            color: var(--text-white);
+            text-shadow: 0 0 10px var(--neon-cyan);
+            margin-bottom: 20px;
+        }
+
+        .download-hub p {
+            font-size: 1.1em;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .download-hub .download-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            color: var(--space-dark);
+            background-color: var(--neon-cyan);
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+            box-shadow: 0 0 8px rgba(0, 191, 255, 0.7);
+        }
+
+        .download-hub .download-button:hover {
+            background-color: var(--text-white);
+            color: var(--neon-cyan);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="categorias.html">Categorías</a></li>
+                <li><a href="acerca de.html">Acerca de</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <h1>Categorías Cósmicas</h1>
+    </header>
+
+    <main>
+        <section class="category-intro">
+            <h2>Explora el Universo de Memes por Categoría</h2>
+            <p>Adéntrate en la nebulosa del humor. Encuentra memes clasificados por temas interestelares para una risa que trasciende la atmósfera. 🌌✨</p>
+        </section>
+
+        <section class="category-list">
+            <h2>Sistemas de Humor Clasificados</h2>
+            <div class="category-container">
+                <h3 class="category-title">Agujeros Negros de la Comedia Absurda</h3>
+                <p>Memes que desafían la lógica y se curvan en el espacio-tiempo del humor sin sentido. ¡Prepárate para la singularidad de la risa! 🤪🌀</p>
+                <div class="meme-grid">
+                    </div>
+                <h4>Zona de Emojis para Teletransportar a tu Chat: Absurdo Cósmico</h4>
+                <div class="emoji-download-zone" id="absurdEmojis">
+                    <span class="downloadable-emoji" title="Cara de payaso">🤡</span>
+                    <span class="downloadable-emoji" title="Ojos saltones">😵</span>
+                    <span class="downloadable-emoji" title="Plátano">🍌</span>
+                    <span class="downloadable-emoji" title="Pensando">🤔</span>
+                    <span class="downloadable-emoji" title="Boca abierta">😮</span>
+                </div>
+            </div>
+
+            <div class="category-container">
+                <h3 class="category-title">Supernovas de los Fail Épicos Espaciales</h3>
+                <p>Cuando las misiones espaciales no salen según lo planeado... ¡pero al menos nos dejan memes brillantes! 💥😂</p>
+                <div class="meme-grid">
+                    </div>
+                <h4>Zona de Emojis para Documentar el Desastre (con estilo): Fails Espaciales</h4>
+                <div class="emoji-download-zone" id="epicFailEmojis">
+                    <span class="downloadable-emoji" title="Explosión">💣</span>
+                    <span class="downloadable-emoji" title="Cara con la boca abierta y una mano cubriéndola">🤭</span>
+                    <span class="downloadable-emoji" title="Robot">🤖</span>
+                    <span class="downloadable-emoji" title="Cohete">🚀</span>
+                    <span class="downloadable-emoji" title="Cara de grito de miedo">😱</span>
+                </div>
+            </div>
+
+            <div class="category-container">
+                <h3 class="category-title">Constelaciones de los Memes Románticos Interestelares</h3>
+                <p>Porque incluso en la vastedad del espacio, el amor encuentra su camino... ¡a través de los memes más cursis! 🥰🌠</p>
+                <div class="meme-grid">
+                    </div>
+                <h4>Zona de Emojis para Enviar con Amor a Años Luz: Romance Cósmico</h4>
+                <div class="emoji-download-zone" id="romanticEmojis">
+                    <span class="downloadable-emoji" title="Corazón rojo">❤️</span>
+                    <span class="downloadable-emoji" title="Ojos brillantes">🤩</span>
+                    <span class="downloadable-emoji" title="Beso">💋</span>
+                    <span class="downloadable-emoji" title="Estrella fugaz">💫</span>
+                    <span class="downloadable-emoji" title="Pareja con corazón">💑</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="download-hub">
+            <h2>¡Explora un Universo de Emojis para Descargar! 🌠</h2>
+            <p>¿Buscas aún más emojis cósmicos para tus comunicaciones interestelares? ¡No busques más!</p>
+            <a href="https://drive.google.com/drive/folders/1rhlUIb1eR0i1rPd_m0H4srYRCHS4mawH" class="download-button" target="_blank">Descargar Emojis Absurdos</a>
+            <a href="https://drive.google.com/drive/folders/1dmtI3lfqx42xVHMd6CJ9cCCHLzkyLYF6" class="download-button" target="_blank">Descargar Emojis de Fails Espaciales</a>
+            <a href="https://drive.google.com/drive/folders/1dO4DZx2XgmTtREXaQf2mS6LmQc4h5ifB" class="download-button" target="_blank">Descargar Emojis Románticos Cósmicos</a>
+            <p>¡Haz clic en los botones de arriba para explorar y descargar aún más emojis desde nuestras colecciones en Google Drive!</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2025 MemeMania. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        console.log("¡Página de Categorías Cósmicas de MemeMania activada!");
+
+        // --- Sección Emojione (Añadiendo más estilo) ---
+        emojione.init();
+        const categoryIntro = document.querySelector('.category-intro p');
+        if (categoryIntro) {
+            categoryIntro.innerHTML += ' ¡Descubre un universo de diversión! <span class="emojione">🌌</span> <span class="emojione">😂</span>';
+        }
+
+        // --- Sección Zonas de Descarga de Emojis (Copiar al Clic - con feedback temático) ---
+        document.querySelectorAll('.emoji-download-zone .downloadable-emoji').forEach(emojiSpan => {
+            emojiSpan.addEventListener('click', () => {
+                navigator.clipboard.writeText(emojiSpan.textContent)
+                    .then(() => {
+                        console.log(`Emoji "${emojiSpan.title}" copiado al portapapeles.`);
+                    })
+                    .catch(err => {
+                        console.error('Error al copiar emoji:', err);
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
+
