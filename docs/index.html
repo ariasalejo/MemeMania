@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemeMania - ¡Viaje Espacial!</title>
+    <link rel="stylesheet" href="assets/styles.css">
+
+    <style>
+        /* Contenedor para las cajas dentro de una sección */
+        .content-grid {
+            display: grid;
+            /* Crea columnas flexibles, mínimo 200px, máximo 1fr */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px; /* Espacio entre las cajas */
+            padding: 20px 0; /* Espacio vertical alrededor de la cuadrícula */
+            justify-items: center; /* Centra las cajas en la cuadrícula si hay espacio extra */
+        }
+
+        /* Estilo base para las cajas de contenido (imágenes con cohetes) */
+        .content-box {
+            background-color: #ffffff;
+            border: 3px solid #3498db; /* Borde azul */
+            padding: 25px; /* Padding uniforme */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* Necesario para posicionar los cohetes */
+            width: 100%; /* Ocupa el ancho de la columna de la grid */
+            max-width: 350px; /* Ancho máximo opcional por caja */
+            box-sizing: border-box;
+            animation: pulse 2.5s infinite ease-in-out;
+            overflow: hidden;
+            /* Centra la imagen si es más pequeña */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Estilo para las imágenes dentro de las cajas con cohetes */
+        .content-box img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Estilo para los cohetes en las esquinas */
+        .rocket {
+            position: absolute;
+            font-size: 1.5em; /* Ajusta según necesidad */
+            user-select: none;
+            z-index: 1;
+        }
+
+        .rocket.top-left { top: 5px; left: 5px; transform: rotate(-45deg); }
+        .rocket.top-right { top: 5px; right: 5px; transform: rotate(45deg); }
+        .rocket.bottom-left { bottom: 5px; left: 5px; transform: rotate(-135deg); }
+        .rocket.bottom-right { bottom: 5px; right: 5px; transform: rotate(135deg); }
+
+        /* Animación de pulso sutil */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+            50% { transform: scale(1.02); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); }
+            100% { transform: scale(1); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        }
+
+        /* Ajustes responsivos para las cajas y cohetes */
+        @media (max-width: 600px) {
+            .content-grid {
+                gap: 15px; /* Menos espacio en móviles */
+                 /* Columnas únicas en móviles */
+                grid-template-columns: 1fr;
+            }
+
+            .content-box {
+                padding: 15px;
+                max-width: 90%; /* Limita el ancho en móviles */
+            }
+
+            .rocket {
+                font-size: 1.2em;
+            }
+
+            .rocket.top-left { top: 3px; left: 3px; }
+            .rocket.top-right { top: 3px; right: 3px; }
+            .rocket.bottom-left { bottom: 3px; left: 3px; }
+            .rocket.bottom-right { bottom: 3px; right: 3px; }
+        }
+
+        /* Estilo opcional para dar margen a las secciones nuevas */
+        .new-section {
+            margin-top: 40px; /* Añade espacio antes de las nuevas secciones */
+            /* Puedes añadir más estilos si quieres diferenciarlas */
+            padding: 0 15px; /* Padding lateral para que no pegue a los bordes */
+            text-align: center; /* Centra el H2 de la sección */
+        }
+
+        .new-section h2 {
+           margin-bottom: 20px; /* Espacio debajo del título de la sección */
+           /* Asegúrate de que el estilo del H2 coincida o se ajuste a tu 'styles.css' */
+           color: #333; /* Ejemplo de color */
+        }
+
+/* --- Estilos para Títulos de Sección con Relieve --- */
+
+/* Aplica a H2 dentro de la sección con clase 'memes' Y a H2 dentro de secciones con clase 'new-section' */
+.memes h2,
+.new-section h2 {
+    /* Color base del texto (Ej: Azul/púrpura oscuro) */
+    color: #3a3a7a;
+
+    /* Sombra para efecto relieve (X-offset Y-offset Blur Color) */
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+
+    /* --- Otras propiedades opcionales (ajusta si es necesario) --- */
+
+    /* Espacio debajo del título */
+    margin-bottom: 25px;
+
+    /* Tamaño de fuente (ajusta si es necesario) */
+    font-size: 2em;
+
+    /* Asegura centrado */
+    text-align: center;
+}
+
+/* (Opcional) Si necesitas un estilo MUY específico solo para "Memes Flotantes" */
+/* que sea diferente de los otros dos, puedes añadirlo aquí: */
+/*
+.memes h2 {
+    color: #otro-color-diferente;
+}
+*/
+
+    </style>
+</head>
+<body>
+
+    <div class="stars-layer-3"></div>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Categorías</a></li>
+                <li><a href="#">Acerca de</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+        <h1>Bienvenidos a MemeMania</h1>
+    </header>
+
+    <main>
+        <section class="intro">
+            <p>La mejor colección de memes del universo. ¡MemeMania es el lugar para reírse y disfrutar en el espacio!</p>
+        </section>
+
+        <section class="memes">
+            <h2>Memes Flotantes</h2>
+            <div class="memes-gallery">
+                <div class="emoji-boxer-container">
+                    <img src="assets/images/emoji_boxer_1.png" alt="Emoji Boxeador 1 Flotante" class="emoji-boxer-img">
+                    <img src="assets/images/emoji_boxer_2.png" alt="Emoji Boxeador 2 Flotante" class="emoji-boxer-img">
+                </div>
+            </div>
+        </section>
+
+        <section class="new-section">
+            <h2>Galaxias graciosas</h2>
+            <div class="content-grid">
+                <div class="content-box">
+                    <span class="rocket top-left">🚀</span>
+                    <span class="rocket top-right">🚀</span>
+                    <img src="assets/images/galaxia1.png" alt="Galaxia Graciosa 1">
+                    <span class="rocket bottom-left">🚀</span>
+                    <span class="rocket bottom-right">🚀</span>
+                </div>
+                <div class="content-box">
+                    <span class="rocket top-left">🚀</span>
+                    <span class="rocket top-right">🚀</span>
+                    <img src="assets/images/galaxia2.png" alt="Galaxia Graciosa 2">
+                    <span class="rocket bottom-left">🚀</span>
+                    <span class="rocket bottom-right">🚀</span>
+                </div>
+            </div>
+        </section>
+        <section class="new-section">
+            <h2>Memes interestelares</h2>
+            <div class="content-grid">
+                <div class="content-box">
+                    <span class="rocket top-left">🚀</span>
+                    <span class="rocket top-right">🚀</span>
+                    <img src="assets/images/memeinterestelar1.png" alt="Meme Interestelar 1">
+                    <span class="rocket bottom-left">🚀</span>
+                    <span class="rocket bottom-right">🚀</span>
+                </div>
+                <div class="content-box">
+                    <span class="rocket top-left">🚀</span>
+                    <span class="rocket top-right">🚀</span>
+                    <img src="assets/images/memeinterestelar2.png" alt="Meme Interestelar 2">
+                    <span class="rocket bottom-left">🚀</span>
+                    <span class="rocket bottom-right">🚀</span>
+                </div>
+            </div>
+        </section>
+        </main> <footer>
+        <p>© 2025 MemeMania. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Tu código JavaScript va aquí
+        console.log("¡La página MemeMania se ha cargado!");
+
+        // Ejemplo: Añadir un evento a las imágenes de las cajas con cohetes
+        // (Esto es solo un ejemplo, necesitarías ajustar las clases/IDs si es necesario)
+        const contentBoxes = document.querySelectorAll('.content-box img'); 
+        contentBoxes.forEach(img => {
+            img.addEventListener('click', () => {
+                alert('¡Hiciste clic en una imagen intergaláctica!'); 
+            });
+        });
+
+    </script>
+</body>
+</html>

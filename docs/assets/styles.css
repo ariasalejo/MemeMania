@@ -1,0 +1,252 @@
+/* --- TEMA ESPACIAL MEJORADO + ANIMACIONES --- */
+
+/* Variables de Color (opcional, pero útil) */
+:root {
+    --space-dark: rgba(10, 20, 40, 0.8); /* Azul oscuro semi-transparente */
+    --space-light: rgba(20, 30, 50, 0.7);
+    --neon-cyan: rgba(0, 191, 255, 0.8);
+    --neon-border: rgba(0, 191, 255, 0.5);
+    --text-light: #eee;
+    --text-white: #fff;
+}
+
+/* --- Efecto Estrellas Animadas --- */
+@keyframes move-stars-1 {
+    from { background-position: 0 0; }
+    to { background-position: -10000px 5000px; }
+}
+@keyframes move-stars-2 {
+    from { background-position: 0 0; }
+    to { background-position: -10000px 5000px; }
+}
+@keyframes move-stars-3 {
+    from { background-position: 0 0; }
+    to { background-position: -5000px 2500px; }
+}
+
+body {
+    /* Fondo base estático (importante si las animaciones fallan) */
+    background-color: #0a1428; /* Azul muy oscuro */
+    /* Imagen de fondo opcional (puede interferir con estrellas) */
+    /* background-image: url('assets/images/space-background.jpg'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; /* Mantiene el fondo fijo */
+
+    color: var(--text-light);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Necesario para los pseudo-elementos de estrellas */
+    overflow-x: hidden; /* Evita scroll horizontal por estrellas */
+}
+
+/* Capas de estrellas con pseudo-elementos */
+body::before, body::after {
+    content: "";
+    position: fixed; /* Usar fixed para que cubran toda la pantalla */
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1; /* Detrás de todo el contenido */
+}
+
+/* Estrellas pequeñas (capa 1) */
+body::before {
+    background-image: radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+                      radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+                      radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                      radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                      radial-gradient(1px 1px at 130px 80px, #eee, rgba(0,0,0,0)),
+                      radial-gradient(1.5px 1.5px at 160px 120px, #ddd, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: move-stars-1 200s linear infinite;
+}
+
+/* Estrellas medianas (capa 2) */
+body::after {
+     background-image: radial-gradient(2px 2px at 50px 50px, #fff, rgba(0,0,0,0)),
+                       radial-gradient(2px 2px at 100px 100px, #ddd, rgba(0,0,0,0)),
+                       radial-gradient(3px 3px at 150px 150px, #fff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 300px 300px;
+    animation: move-stars-2 150s linear infinite;
+    opacity: 0.8;
+}
+
+/* Opcional: Capa 3 (estrellas más grandes/lentas) con un div extra */
+/* Si quieres una tercera capa, añade <div class="stars-layer-3"></div> justo después de <body> */
+/*
+.stars-layer-3 {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    background-image: radial-gradient(3px 3px at 100px 100px, #eee, rgba(0,0,0,0)),
+                      radial-gradient(4px 4px at 200px 200px, #fff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 400px 400px;
+    animation: move-stars-3 300s linear infinite;
+    opacity: 0.6;
+}
+*/
+
+
+/* Resto de estilos (Header, Nav, Main, Intro - similares a antes) */
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8); /* Más opaco */
+    border-bottom: 1px solid var(--neon-border); /* Borde neón sutil */
+    z-index: 10; /* Asegura que esté sobre las estrellas */
+    position: relative; /* Asegura z-index */
+}
+
+h1 {
+    font-size: 3em;
+    color: var(--text-white);
+    text-shadow: 0 0 8px var(--neon-cyan), 2px 2px 5px rgba(0, 0, 0, 0.8); /* Efecto neón */
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+h1::before { content: '🚀 '; } /* Añadir cohete con CSS */
+h1::after { content: ' 🚀'; }
+
+h2 {
+   color: var(--text-light);
+   text-align: center;
+   margin-top: 40px;
+   text-shadow: 0 0 5px var(--neon-cyan), 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+nav ul { list-style: none; padding: 0; }
+nav ul li { display: inline; margin: 0 15px; }
+nav ul li a {
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s, text-shadow 0.3s; /* Transición suave */
+}
+nav ul li a:hover {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 5px var(--neon-cyan);
+    text-decoration: none; /* Quitar subrayado si no gusta */
+}
+
+main {
+    flex-grow: 1;
+    padding: 20px;
+    z-index: 5; /* Sobre las estrellas */
+    position: relative; /* Asegura z-index */
+}
+
+.intro {
+    text-align: center;
+    margin: 30px auto 40px auto;
+    font-size: 1.1em;
+    padding: 0 10%;
+    line-height: 1.6;
+    background-color: var(--space-light); /* Fondo sutil para intro */
+    border-radius: 8px;
+    max-width: 800px; /* Limita ancho */
+    padding: 20px;
+    border: 1px solid var(--neon-border);
+}
+
+.memes { text-align: center; }
+.memes-gallery { padding: 20px; }
+
+/* --- CONTENEDOR E IMÁGENES EMOJI BOXERS MEJORADOS --- */
+
+/* Animación Flotante */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); } /* Sube 10px */
+}
+
+/* Contenedor con borde normal y Emojis en Esquinas */
+.emoji-boxer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Más espacio */
+    padding: 30px; /* Más padding interno */
+    background-color: var(--space-dark); /* Fondo más oscuro */
+    /* Borde estilo Neón */
+    border: 2px solid var(--neon-cyan);
+    box-shadow: 0 0 15px var(--neon-cyan), inset 0 0 10px rgba(0, 191, 255, 0.3); /* Sombra exterior e interior */
+    border-radius: 15px;
+    max-width: 500px; /* Ajusta si es necesario */
+    margin: 40px auto; /* Más margen vertical */
+    position: relative; /* NECESARIO para posicionar emojis de esquina */
+}
+
+/* Pseudo-elementos para emojis en esquinas */
+.emoji-boxer-container::before,
+.emoji-boxer-container::after {
+    content: '🚀'; /* Emoji a usar (o '✨', '👽', etc.) */
+    position: absolute;
+    font-size: 1.8em; /* Tamaño del emoji */
+    z-index: 1;
+    /* Opcional: Animación para los emojis de esquina */
+    /* animation: spin 5s linear infinite; */
+}
+/* Esquina Superior Izquierda */
+.emoji-boxer-container::before { top: -15px; left: -15px; }
+/* Esquina Inferior Derecha */
+.emoji-boxer-container::after { bottom: -15px; right: -15px; transform: rotate(180deg); /* Rotar si es necesario */ }
+
+/* Necesitamos 2 pseudo-elementos más. Una forma es usar los de las imágenes */
+/* O añadir spans vacíos en el HTML: <span class="corner-emoji top-right"></span> ... */
+/* Usaremos pseudo-elementos en las imágenes (menos ideal si hay muchas imágenes) */
+.emoji-boxer-img:first-child::after { /* Esquina Superior Derecha */
+    content: '✨';
+    position: absolute;
+    top: -15px;
+    right: -15px; /* Relativo al contenedor padre (.emoji-boxer-container) */
+    font-size: 1.8em;
+     /* animation: spin 5s linear infinite reverse; */
+}
+.emoji-boxer-img:last-child::before { /* Esquina Inferior Izquierda */
+     content: '✨';
+    position: absolute;
+    bottom: -15px;
+    left: -15px; /* Relativo al contenedor padre */
+    font-size: 1.8em;
+     /* animation: spin 5s linear infinite; */
+}
+/* Opcional: Keyframes para animar emojis de esquina */
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+
+/* Imágenes Emoji Boxers con Animación Flotante */
+.emoji-boxer-img {
+    max-width: 45%;
+    height: auto;
+    display: block;
+    /* Aplicar la animación float */
+    animation-name: float;
+    animation-duration: 3s; /* Duración del ciclo de flotación */
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    position: relative; /* Necesario para sus pseudo-elementos de esquina */
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid var(--neon-border);
+    width: 100%;
+    margin-top: auto;
+    z-index: 10; /* Sobre las estrellas */
+    position: relative; /* Asegura z-index */
+}
+
+footer p {
+    color: var(--text-light);
+    margin: 0;
+    font-size: 0.9em;
+}
